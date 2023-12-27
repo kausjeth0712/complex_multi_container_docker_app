@@ -12,3 +12,10 @@ after_success:
   - docker build -t kaushal/complex_nginx ./nginx
   - docker build -t kaushal/complex_server ./server
   - docker build -t kaushal/complex_worker ./worker
+  # Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Take those images and push them to the docker hub
+  - docker push kaushal/complex_client
+  - docker push kaushal/complex_nginx
+  - docker push kaushal/complex_server
+  - docker push kaushal/complex_worker
