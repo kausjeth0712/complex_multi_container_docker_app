@@ -2,20 +2,20 @@ sudo: required
 services:
   - docker
 before_install:
-  - docker build -t kaushal/complex_react_web -f ./client/Dockerfile.dev ./client
+  - docker build -t kausjethdoc/complex_react_web -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true kaushal/complex_react_web npm test
+  - docker run -e CI=true kausjethdoc/complex_react_web npm test
 
 after_success:
-  - docker build -t kaushal/complex_client ./client
-  - docker build -t kaushal/complex_nginx ./nginx
-  - docker build -t kaushal/complex_server ./server
-  - docker build -t kaushal/complex_worker ./worker
+  - docker build -t kausjethdoc/complex_client ./client
+  - docker build -t kausjethdoc/complex_nginx ./nginx
+  - docker build -t kausjethdoc/complex_server ./server
+  - docker build -t kausjethdoc/complex_worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to the docker hub
-  - docker push kaushal/complex_client
-  - docker push kaushal/complex_nginx
-  - docker push kaushal/complex_server
-  - docker push kaushal/complex_worker
+  - docker push kausjethdoc/complex_client
+  - docker push kausjethdoc/complex_nginx
+  - docker push kausjethdoc/complex_server
+  - docker push kausjethdoc/complex_worker
