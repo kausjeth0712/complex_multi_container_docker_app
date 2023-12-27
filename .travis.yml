@@ -1,0 +1,14 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - docker build -t kaushal/complex_react_web -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run kaushal/complex_react_web npm test -- --coverage
+
+after_success:
+  - docker build -t kaushal/complex_client ./client
+  - docker build -t kaushal/complex_nginx ./nginx
+  - docker build -t kaushal/complex_server ./server
+  - docker build -t kaushal/complex_worker ./worker
